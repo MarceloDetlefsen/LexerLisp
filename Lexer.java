@@ -43,7 +43,12 @@ public class Lexer
     }
 
     public boolean isBalanced(String code) {
-        //Por desarrollar
-        return false; //Esto solo es temporal en lo que se implementa el metodo
+        int balance = 0;
+        for (char c : code.toCharArray()) {
+            if (c == '(') balance++;
+            else if (c == ')') balance--;
+            if (balance < 0) return false;
+        }
+        return balance == 0;
     }
 }
