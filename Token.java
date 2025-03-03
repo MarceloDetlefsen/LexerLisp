@@ -13,8 +13,6 @@ public class Token
 {
     private String value;
 
-        private String value;
-
     public Token(String value) {
         this.value = value;
     }
