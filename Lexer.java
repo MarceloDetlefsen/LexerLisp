@@ -51,4 +51,20 @@ public class Lexer
         }
         return balance == 0;
     }
+
+    public boolean isValidExpression(List<Token> tokens) {
+        boolean hasParentheses = false;
+        boolean hasOperators = false;
+        String operators = "+-*/";
+
+        for (Token token : tokens) {
+            String value = token.getValue();
+            if (value.equals("(") || value.equals(")")) {
+                hasParentheses = true;
+            } else if (operators.contains(value)) {
+                hasOperators = true;
+            }
+        }
+        return hasParentheses && hasOperators;
+    }
 }

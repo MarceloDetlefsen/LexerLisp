@@ -13,7 +13,9 @@ import java.util.Scanner;
  *   1) Determinar si la expresión LISP es correcta 
  *   2) Listar los elementos (tokens) generados
  */
-public class Main {
+
+public class Main 
+{
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder codeBuilder = new StringBuilder();
@@ -21,43 +23,50 @@ public class Main {
         System.out.println("\nIngrese la expresión LISP (puede usar varias líneas).");
         System.out.println("Al terminar de ingresarla, presione Enter en una línea vacía para finalizar:\n");
 
-        // Leemos todas las lineas y vamos manejandolas una a una, en el momento que encontremos una vacia paramos
+        // Asi se leen multiples lineas de texto
         while (true) {
             String line = scanner.nextLine().trim();
             if (line.isEmpty()) {
-                break; // Se para el proceso
+                break;
             }
             codeBuilder.append(line).append(" ");
         }
 
-        System.out.println();
-        String code = codeBuilder.toString();
+        String code = codeBuilder.toString().trim();
+
+        // Verificación de que la entrada tenga paréntesis
+        if (!code.contains("(") || !code.contains(")")) {
+            System.out.println("Error: La expresión ingresada no es una expresión válida en LISP (falta de paréntesis).");
+            scanner.close();
+            return;
+        }
 
         Lexer lexer = new Lexer();
 
         // Se verifica si la instancia de la expresion sea correcta 
         boolean balanced = lexer.isBalanced(code);
-
         if (!balanced) {
-            System.out.println("La expresión: " + code + " es incorrecta.");
+            System.out.println("La expresión: " + code + " es incorrecta ya que tiene paréntisis desbalanceados.");
             scanner.close();
             return;
         }
-
+        
         // Al estar correcta, tokenizamos la expresion de LISP
         List<Token> tokens = lexer.tokenize(code);
 
-
         // Imprimimos la lista de tokens
-        System.out.print("Lista de elementos (tokens):");
-        for (int i = 0; i < tokens.size(); i++) {
-            System.out.print(tokens.get(i).getValue());
-            // Si no es el ultimo le agregamos una coma para el siguiente
-            if (i < tokens.size() - 1) {
-                System.out.print(", ");
+        if (tokens.isEmpty()) {
+            System.out.println("No se encontraron tokens en la expresión.");
+        } else {
+            System.out.print("Lista de elementos (tokens): ");
+            for (int i = 0; i < tokens.size(); i++) {
+                System.out.print("[" + tokens.get(i).getValue() + "]");
+                if (i < tokens.size() - 1) {
+                    System.out.print(", ");
+                }
             }
+            System.out.println();
         }
-
         scanner.close();
     }
 }
