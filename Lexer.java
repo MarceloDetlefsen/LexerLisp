@@ -19,15 +19,17 @@ public class Lexer
 {
     private List<Token> tokens;
 
+    //Constructor
     public Lexer() {
         this.tokens = new ArrayList<>();
     }
 
+    // Este método permite comparar patrones de texto
     public List<Token> tokenize(String code) {
         tokens.clear();
-        Matcher matcher = Pattern.compile("\\(|\\)|[a-zA-Z]+|[0-9]+|[-+*/]").matcher(code);
+        Matcher matcher = Pattern.compile("\\(|\\)|[a-zA-Z]+|[0-9]+|[-+*/]").matcher(code);//Tipo de patron permitido
         while (matcher.find()) {
-            tokens.add(new Token(matcher.group()));
+            tokens.add(new Token(matcher.group()));//Agrega cada coincidencia comoun nuevo token a la lista
         }
         return tokens;
     }
@@ -42,6 +44,7 @@ public class Lexer
         return tokens;
     }
 
+    // Este método permite comprobar que la expresión esté equilibrada
     public boolean isBalanced(String code) {
         int balance = 0;
         for (char c : code.toCharArray()) {
@@ -49,22 +52,23 @@ public class Lexer
             else if (c == ')') balance--;
             if (balance < 0) return false;
         }
-        return balance == 0;
+        return balance == 0; // si al final el balance es cero, los paréntesis están equilibrados
     }
 
+    //Comprobar que la expresión sea válida
     public boolean isValidExpression(List<Token> tokens) {
         boolean hasParentheses = false;
         boolean hasOperators = false;
         String operators = "+-*/";
 
         for (Token token : tokens) {
-            String value = token.getValue();
+            String value = token.getValue(); // obtiene el valor de cada token
             if (value.equals("(") || value.equals(")")) {
                 hasParentheses = true;
             } else if (operators.contains(value)) {
                 hasOperators = true;
             }
         }
-        return hasParentheses && hasOperators;
+        return hasParentheses && hasOperators; //retorna verdadero si hay parentesis y operadores
     }
 }
