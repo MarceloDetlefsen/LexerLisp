@@ -17,8 +17,8 @@ import java.util.Scanner;
 public class Main 
 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        StringBuilder codeBuilder = new StringBuilder();
+        Scanner scanner = new Scanner(System.in); //Se crea la variable scanner para dejar ingresar valores al usuario
+        StringBuilder codeBuilder = new StringBuilder();//Se crea la variable para construir y modificar cadenas de caracteres
 
         System.out.println("\nIngrese la expresión LISP (puede usar varias líneas).");
         System.out.println("Al terminar de ingresarla, presione Enter en una línea vacía para finalizar:\n");
@@ -32,7 +32,7 @@ public class Main
             codeBuilder.append(line).append(" ");
         }
 
-        String code = codeBuilder.toString().trim();
+        String code = codeBuilder.toString().trim(); //Se almacena la expresión en un string
 
         // Verificación de que la entrada tenga paréntesis
         if (!code.contains("(") || !code.contains(")")) {
