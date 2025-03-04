@@ -9,16 +9,21 @@
  * Descripción: Clase que se encarga de almacenar los tokens de la expresión LISP.
  */
 
+//Clase Token 
 public class Token 
 {
-    private String value;
+    //Atributos
+    private String value; 
 
+    //Métodos
+
+    //Constructor
     public Token(String value) {
-        this.value = value;
+        this.value = value; 
     }
 
     public String getValue() {
-        return value;
+        return value; //Devuelve el valor del token
     }
 
     @Override
