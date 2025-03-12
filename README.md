@@ -5,8 +5,8 @@ Permite verificar si una expresión es correcta (balanceo de paréntesis) y toke
 # 🚀 Instalación y Ejecución
 1. Clonar el repositorio:
     ```bash
-    git clone https://github.com/usuario/proyecto-lexer.git
-    cd proyecto-lexer
+    git clone https://github.com/MarceloDetlefsen/LexerLisp.git
+    cd LexerLisp
 
 2. Compilar el código:
     ```bash
